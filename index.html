@@ -34,7 +34,7 @@
                         name="submit-button" 
                         type="submit" 
                         value="Add" 
-                        onclick="handleSubmitTodo(event)"
+                        onclick="addNewTodoItem(event)"
                     />
                 </div>
             </form>
@@ -42,14 +42,6 @@
             <div class="row">
                 <div class="column todo-list-container">
                     <ul id="todo-list">
-                        <li class="todo-list-item" onclick="handleClickOnListItem(event)">
-                            <span>todo-list-item</span>
-                            <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
-                        </li>
-                        <li class="todo-list-item completed" onclick="handleClickOnListItem(event)">
-                            <span>todo-list-item-completed</span>
-                            <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -57,6 +49,7 @@
         </div>
     </div>
 
+    <script src="./src/scripts/utils.js"></script>
     <script src='./src/scripts/main.js'></script>
 </body>
 </html>

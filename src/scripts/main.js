@@ -4,23 +4,7 @@ const submitButton = document.getElementById("submit-button");
 const todoList = document.getElementById("todo-list");
 const MAXTODOITEMS = 8;
 
-
-const listCanReceiveMoreItems = (list, maxItems) => {
-    const currentItemCount = list.getElementsByTagName("li").length;
-
-    return  currentItemCount < maxItems;
-}
-
-const validateInput = (text) => {
-    let result = "";
-
-    if(text.length === 0){
-        result = "Empty values are not allowed";
-    } else if(text.length < 3){
-        result = "Value must be at least 3 characters";
-    }
-    return result;
-}
+let savedItems = [];
 
 const handleDeleteListItem = (e) => {
 
@@ -34,13 +18,12 @@ const handleDeleteListItem = (e) => {
 
 
     if(parentElement.classList.contains(classToWorkWith)){
-
-        //ITEM CAN'T BE DELETED
         alert("ELEMENT CANNOT BE DELETED")
 
     } else{
         const response = confirm("Are you sure you want to delete this item?")
         if(response) parentElement.remove();
+        deleteItemFromLocalStorage(parentElement.id);
     }
 }
 
@@ -55,43 +38,56 @@ const handleClickOnListItem = (e) => {
         if(elementClassList.contains(classToWorkWith)){
             elementClassList.remove(classToWorkWith);
             elementButton.style.display = "inline-block";
+            updateItemInLocalStorage({id: element.id, text: element.text, isCompleted: false});
 
         } else{
             elementClassList.add(classToWorkWith);
             elementButton.style.display = "none";
+            updateItemInLocalStorage({id: element.id, text: element.text, isCompleted: true});
         }
-
     }
 }
 
-const handleSubmitTodo = (e) => {
+const appendTodoItem = ({id, text, isCompleted}) => {
+
+    const newListItem = document.createElement("li");
+    const newSpanItem = document.createElement("span");
+    const newListItemButton = document.createElement("button");
+
+    newListItem.id = id;
+
+    newListItem.onclick = handleClickOnListItem;
+    newListItemButton.onclick = handleDeleteListItem;
+
+    newListItem.classList.add("todo-list-item");
+    newListItemButton.classList.add("todo-list-item-button");
+    if(isCompleted) {
+        newListItem.classList.add("completed");
+        newListItemButton.style.display = "none";
+    }
+
+    newSpanItem.append(text);
+    newListItemButton.append("X");
+
+    newListItem.appendChild(newSpanItem);
+    newListItem.appendChild(newListItemButton);
+
+    todoList.append(newListItem);
+}
+
+const addNewTodoItem = (e) => {
     e.preventDefault();
 
     if(listCanReceiveMoreItems(todoList, MAXTODOITEMS)){
         const newTodoText = inputField.value;
         const isTodoTextValid = validateInput(newTodoText);
+        const newTodoItem = {id: getUniqueId("li"), text: newTodoText, isCompleted: false}
     
         if(isTodoTextValid.length > 0){
             alert(isTodoTextValid);
         } else{
-            const newListItem = document.createElement("li");
-            const newSpanItem = document.createElement("span");
-            const newListItemButton = document.createElement("button");
-
-            newListItem.onclick = handleClickOnListItem;
-            newListItemButton.onclick = handleDeleteListItem;
-    
-            newListItem.classList.add("todo-list-item");
-            newListItemButton.classList.add("todo-list-item-button");
-    
-            newSpanItem.append(newTodoText);
-            newListItemButton.append("X");
-    
-            newListItem.appendChild(newSpanItem);
-            newListItem.appendChild(newListItemButton);
-    
-            todoList.append(newListItem);
-        
+            appendTodoItem(newTodoItem);
+            saveItemToLocalStorage(newTodoItem);
             inputField.value = "";
         }
     } else {
@@ -99,3 +95,18 @@ const handleSubmitTodo = (e) => {
     }    
 }
 
+const initializeData = (() => {
+    if(localStorage.getItem("savedItems")){
+        savedItems = retrieveItemsFromLocalStorage();
+        if(savedItems.length > 0){
+            savedItems.forEach((item) => {
+                appendTodoItem({id: item.id, text: item.text, isCompleted: item.isCompleted});
+            });
+        } else{
+            console.log('THERE ARE NO ITEMS SAVED, BUT THE LIST EXISTS');
+        } 
+    } else{
+        //Create the local storage item if it doesn't already exists
+        localStorage.setItem("savedItems", "");
+    }
+})();
