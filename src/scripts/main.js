@@ -49,7 +49,7 @@ const handleClickOnListItem = (e) => {
 
     if(element.tagName.toLowerCase() === "li"){
         const classToWorkWith = "completed";
-        const elementButton = element.firstElementChild;
+        const elementButton = element.querySelector(".todo-list-item-button");
         const elementClassList = element.classList;
 
         if(elementClassList.contains(classToWorkWith)){
@@ -75,6 +75,7 @@ const handleSubmitTodo = (e) => {
             alert(isTodoTextValid);
         } else{
             const newListItem = document.createElement("li");
+            const newSpanItem = document.createElement("span");
             const newListItemButton = document.createElement("button");
 
             newListItem.onclick = handleClickOnListItem;
@@ -83,9 +84,10 @@ const handleSubmitTodo = (e) => {
             newListItem.classList.add("todo-list-item");
             newListItemButton.classList.add("todo-list-item-button");
     
-            newListItem.append(newTodoText);
+            newSpanItem.append(newTodoText);
             newListItemButton.append("X");
     
+            newListItem.appendChild(newSpanItem);
             newListItem.appendChild(newListItemButton);
     
             todoList.append(newListItem);

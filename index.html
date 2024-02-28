@@ -8,9 +8,10 @@
 </head>
 <body class="container">
     <div class="row">
-        <div class="column">
+        <div id="main-content-container" class="column">
             <h1 id="main-title">TO-DO LIST</h1>
-            <h3>Functionality of the website:</h3>
+            <hr/>
+            <h3>Web Site Functionality:</h3>
             <ol id="instructions-list">
                 <li>Enter text into the input field to add items to your list</li>
                 <br/>
@@ -18,27 +19,40 @@
                 <br/>
                 <li>Click the "X" to remove the item from your list</li>
             </ol>
-            
+            <hr/>
+            <h3>Create New Task</h3>
             <form id="main-form">
                 <div class="row">
-                    <input id="todo-input" name="todo-input" type="text" />
-                    <input id="submit-button" name="submit-button" type="submit" value="Add" onclick="handleSubmitTodo(event)"/>
+                    <input 
+                        id="todo-input" 
+                        name="todo-input" 
+                        type="text" 
+                        placeholder="Enter a new item..."
+                    />
+                    <input 
+                        id="submit-button" 
+                        name="submit-button" 
+                        type="submit" 
+                        value="Add" 
+                        onclick="handleSubmitTodo(event)"
+                    />
                 </div>
             </form>
-                <div class="row">
-                    <div class="column todo-list-container">
-                        <ul id="todo-list">
-                            <li class="todo-list-item" onclick="handleClickOnListItem(event)">
-                                <span>todo-list-item</span>
-                                <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
-                            </li>
-                            <li class="todo-list-item completed" onclick="handleClickOnListItem(event)">
-                                <span>todo-list-item-completed</span>
-                                <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
-                            </li>
-                        </ul>
-                    </div>
+            <hr/>
+            <div class="row">
+                <div class="column todo-list-container">
+                    <ul id="todo-list">
+                        <li class="todo-list-item" onclick="handleClickOnListItem(event)">
+                            <span>todo-list-item</span>
+                            <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
+                        </li>
+                        <li class="todo-list-item completed" onclick="handleClickOnListItem(event)">
+                            <span>todo-list-item-completed</span>
+                            <button class="todo-list-item-button" onclick="handleDeleteListItem(event)">X</button>
+                        </li>
+                    </ul>
                 </div>
+            </div>
            
         </div>
     </div>
