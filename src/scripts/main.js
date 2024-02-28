@@ -25,8 +25,16 @@ const handleSubmitTodo = (e) => {
         alert(isTodoTextValid);
     } else{
         const newListItem = document.createElement("li");
-        newListItem.append(newTodoText);
+        const newListItemButton = document.createElement("button");
+
         newListItem.classList.add("todo-list-item");
+        newListItemButton.classList.add("todo-list-item-button");
+
+        newListItem.append(newTodoText);
+        newListItemButton.append("X");
+
+        newListItem.appendChild(newListItemButton);
+
         todoList.append(newListItem);
     
         inputField.value = "";
