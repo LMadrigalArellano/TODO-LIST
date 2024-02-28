@@ -26,7 +26,7 @@ const handleSubmitTodo = (e) => {
     } else{
         const newListItem = document.createElement("li");
         newListItem.append(newTodoText);
-    
+        newListItem.classList.add("todo-list-item");
         todoList.append(newListItem);
     
         inputField.value = "";

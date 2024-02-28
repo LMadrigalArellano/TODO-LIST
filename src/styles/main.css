@@ -16,6 +16,25 @@ body {
     flex-direction: column;
 }
 
+.todo-list-item {
+    background-color: #55CCD9;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    list-style: none;
+    padding: 12px;
+    margin: 0;
+    border: 3px solid #306E79;
+    margin: 5px 0 5px 0;
+}
+.todo-list-item.completed {
+    background-color: #52D967;
+}
+
+#todo-list {
+    margin: 0;
+    padding: 0;
+}
+
 #main-title {
     color: whitesmoke;
 }
@@ -23,3 +42,4 @@ body {
 #instructions-list {
     color: #F2BE5C;
 }
+
