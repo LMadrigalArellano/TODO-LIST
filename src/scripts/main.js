@@ -22,22 +22,46 @@ const validateInput = (text) => {
     return result;
 }
 
-const handleClickOnListItem = (event) => {
+const handleDeleteListItem = (e) => {
+
+    e.preventDefault();
 
     const classToWorkWith = "completed";
-    const element = event.target;
-    const elementButton = element.firstElementChild;
-    const elementClassList = element.classList;
+    const element = e.target;
+    const parentElement = element.parentElement;
 
-    if(elementClassList.contains(classToWorkWith)){
-        elementClassList.remove(classToWorkWith);
-        elementButton.style.display = "inline-block";
+    console.log(element.parentElement);
+
+
+    if(parentElement.classList.contains(classToWorkWith)){
+
+        //ITEM CAN'T BE DELETED
+        alert("ELEMENT CANNOT BE DELETED")
 
     } else{
-        elementClassList.add(classToWorkWith);
-        elementButton.style.display = "none";
+        const response = confirm("Are you sure you want to delete this item?")
+        if(response) parentElement.remove();
     }
+}
 
+const handleClickOnListItem = (e) => {
+    const element = e.target;
+
+    if(element.tagName.toLowerCase() === "li"){
+        const classToWorkWith = "completed";
+        const elementButton = element.firstElementChild;
+        const elementClassList = element.classList;
+
+        if(elementClassList.contains(classToWorkWith)){
+            elementClassList.remove(classToWorkWith);
+            elementButton.style.display = "inline-block";
+
+        } else{
+            elementClassList.add(classToWorkWith);
+            elementButton.style.display = "none";
+        }
+
+    }
 }
 
 const handleSubmitTodo = (e) => {
@@ -54,6 +78,7 @@ const handleSubmitTodo = (e) => {
             const newListItemButton = document.createElement("button");
 
             newListItem.onclick = handleClickOnListItem;
+            newListItemButton.onclick = handleDeleteListItem;
     
             newListItem.classList.add("todo-list-item");
             newListItemButton.classList.add("todo-list-item-button");
@@ -69,14 +94,6 @@ const handleSubmitTodo = (e) => {
         }
     } else {
         alert(`A maximum of ${MAXTODOITEMS} items are allowed in the list`)
-    }
-    
-   
-    
-
-
-    
+    }    
 }
-
-mainForm.addEventListener("submit", handleSubmitTodo);
 

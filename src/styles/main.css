@@ -43,6 +43,9 @@ body {
 .todo-list-item.completed {
     background-color: #52D967;
 }
+.todo-list-item.completed.span {
+    text-decoration: line-through;
+}
 
 #todo-list {
     margin: 0;
