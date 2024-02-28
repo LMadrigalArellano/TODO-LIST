@@ -14,16 +14,16 @@ const handleDeleteListItem = (e) => {
     const element = e.target;
     const parentElement = element.parentElement;
 
-    console.log(element.parentElement);
-
-
     if(parentElement.classList.contains(classToWorkWith)){
         alert("ELEMENT CANNOT BE DELETED")
 
     } else{
         const response = confirm("Are you sure you want to delete this item?")
-        if(response) parentElement.remove();
-        deleteItemFromLocalStorage(parentElement.id);
+        if(response) {
+            console.log(response, parentElement.id);
+            deleteItemFromLocalStorage(parentElement.id);
+            parentElement.remove();
+        }
     }
 }
 
