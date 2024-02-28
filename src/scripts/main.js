@@ -22,6 +22,23 @@ const validateInput = (text) => {
     return result;
 }
 
+const handleClickOnListItem = (event) => {
+
+    const classToWorkWith = "completed";
+    const element = event.target;
+    const elementButton = element.firstElementChild;
+    const elementClassList = element.classList;
+
+    if(elementClassList.contains(classToWorkWith)){
+        elementClassList.remove(classToWorkWith);
+        elementButton.style.display = "inline-block";
+
+    } else{
+        elementClassList.add(classToWorkWith);
+        elementButton.style.display = "none";
+    }
+
+}
 
 const handleSubmitTodo = (e) => {
     e.preventDefault();
@@ -35,6 +52,8 @@ const handleSubmitTodo = (e) => {
         } else{
             const newListItem = document.createElement("li");
             const newListItemButton = document.createElement("button");
+
+            newListItem.onclick = handleClickOnListItem;
     
             newListItem.classList.add("todo-list-item");
             newListItemButton.classList.add("todo-list-item-button");
