@@ -20,7 +20,6 @@ const handleDeleteListItem = (e) => {
     } else{
         const response = confirm("Are you sure you want to delete this item?")
         if(response) {
-            console.log(response, parentElement.id);
             deleteItemFromLocalStorage(parentElement.id);
             parentElement.remove();
         }
@@ -102,9 +101,7 @@ const initializeData = (() => {
             savedItems.forEach((item) => {
                 appendTodoItem({id: item.id, text: item.text, isCompleted: item.isCompleted});
             });
-        } else{
-            console.log('THERE ARE NO ITEMS SAVED, BUT THE LIST EXISTS');
-        } 
+        }
     } else{
         //Create the local storage item if it doesn't already exists
         localStorage.setItem("savedItems", "");

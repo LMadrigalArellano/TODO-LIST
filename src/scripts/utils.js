@@ -21,7 +21,6 @@ const updateItemInLocalStorage = (updatedItem) => {
 }
 
 const deleteItemFromLocalStorage = (itemId) => {
-    console.log(itemId, savedItems);
     const filteredItems = savedItems.filter((item) => item.id != itemId);
 
     localStorage.setItem("savedItems", JSON.stringify(filteredItems));
