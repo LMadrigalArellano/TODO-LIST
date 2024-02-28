@@ -1,0 +1,19 @@
+body {
+    background-color: #8C8C8C;
+}
+
+.container {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+#main-title {
+    color: whitesmoke;
+}
