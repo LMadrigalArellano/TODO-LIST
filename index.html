@@ -19,11 +19,19 @@
                 <li>Click the "X" to remove the item from your list</li>
             </ol>
             
-            <div class="row">
-                <input id="new-item" name="new-item" type="text" />
-                <button>ICON</button>
-            </div>
-            
+            <form id="main-form">
+                <div class="row">
+                    <input id="todo-input" name="todo-input" type="text" />
+                    <input id="submit-button" name="submit-button" type="submit" value="Add"/>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <ul id="todo-list">
+                        </ul>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
